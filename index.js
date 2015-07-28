@@ -56,6 +56,7 @@ routes.notification = function(req, res) {
                       }).then(function(asset) {
       // tell the clients
       alertClients(asset);
+      res.status(200).send('Thanks guys!');
     }).catch(function(e) {
       console.error(e, e.stack);
       res.status(500).send('Something broke, blame Once');
@@ -63,7 +64,8 @@ routes.notification = function(req, res) {
   }
   
   // otherwise, we're happy with just logging for now, so let Once know we're happy
-  res.status(200).send('Thanks guys!');
+  else
+    res.status(200).send('Thanks guys!');
 };
 
 // set up the rest of the routes
@@ -71,7 +73,7 @@ app.post('/asset', routes.createAsset);
 app.post('/notifications', routes.notification);
 
 io.on('connection', function (socket) {
-  socket.emit('notifications', { msg: 'Connected' });
+  socket.emit('connections', { msg: 'Connected' });
 });
 
 // notify all of the clients that we got a video done

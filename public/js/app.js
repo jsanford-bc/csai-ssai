@@ -18,7 +18,7 @@ $(function() {
 
   // handle callbacks
   var socket = io.connect();
-  socket.on('notifications', function(data) {
+  socket.on('connections', function(data) {
     console.log(data);
   });
   socket.on('video_published', function(data) {
@@ -37,6 +37,7 @@ $(function() {
 
   // party starts when the user clicks create
   $('#create_asset_btn').click(function() {
+    $('#create_asset_btn').attr('disabled', 'disabled');
     // make our call
     var data = {
       asset: {
@@ -93,23 +94,23 @@ $(function() {
     $('#player_holder').empty().append($player);
     bc($player[0]);
     videojs(playerId).ready(function() {
-      csaiPlayer = this;
+      adPlayer = this;
       console.log('CSAI player shown');
       console.log(asset);
-      console.log(csaiPlayer);
+      console.log(adPlayer);
       // setup IMA
-      csaiPlayer.ima3({
+      adPlayer.ima3({
         prerollTimeout: 5000,
         serverUrl: 'http://solutions.brightcove.com/croberts/tools/tags/vast.php'
       });
       // size it
-      csaiPlayer.height(csaiPlayer.width()*9/16);
+      adPlayer.height(adPlayer.width()*9/16);
       // load the source
-      csaiPlayer.src([
+      adPlayer.src([
         {type: 'application/x-mpegUrl', src: asset.hlsUrl}
       ]);
       // play it
-      csaiPlayer.play();
+      adPlayer.play();
     });
   });
 
@@ -139,18 +140,20 @@ $(function() {
     $('#player_holder').empty().append($player);
     bc($player[0]);
     videojs(playerId).ready(function() {
-      ssaiPlayer = this;
+      adPlayer = this;
       console.log('SSAI player shown');
       console.log(asset);
-      console.log(ssaiPlayer);
+      console.log(adPlayer);
       // size it
-      ssaiPlayer.height(csaiPlayer.width()*9/16);
+      adPlayer.height(adPlayer.width()*9/16);
+      // prepare to play the video
+      adPlayer.one('loadedmetadta', function() {
+        adPlayer.play();
+      });
       // setup OnceUX
-      ssaiPlayer.onceUX({
+      adPlayer.onceux({
         metadataUri: asset.metadataUri
       });
-      // play it
-      ssaiPlayer.play();
     });
   });
 
