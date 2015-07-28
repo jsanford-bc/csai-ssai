@@ -1,0 +1,8 @@
+{
+  "once_api_key": "<Once API Key>",
+  "once_domain": "<Once Domain Name>",
+  "once_domain_guid": "<Once Domain GUID>",
+  "once_channel_guid": "<Once Channel GUID>",
+  "once_catalog_guid": "<Once Catalog GUID>",
+  "once_application_guid": "<Once Application GUID>"
+}
