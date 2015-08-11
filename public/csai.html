@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CSAI Player</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="status_holder" class="hidden">
+      <h3 class="text-center">You can use Once now</h3>
+    </div>
+    <video
+      id="csaiPlayer"
+      data-account="1924997959001"
+      data-player="c800c858-444c-45d7-af6c-4ce98cd42a67"
+      data-embed="default"
+      width=100%
+      height=100%
+      class="video-js" controls></video>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//players.brightcove.net/1924997959001/c800c858-444c-45d7-af6c-4ce98cd42a67_default/index.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/csai.js"></script>
+  </body>
+</html>

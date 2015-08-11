@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CSAI Player</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="status_holder" class="hidden">
+      <h3 class="text-center">Waiting for Once ingestion to complete...</h3>
+      <div class="main">
+        <div class="small1">
+          <div class="small ball smallball1"></div>
+          <div class="small ball smallball2"></div>
+          <div class="small ball smallball3"></div>
+          <div class="small ball smallball4"></div>
+        </div>
+        <div class="small2">
+          <div class="small ball smallball5"></div>
+          <div class="small ball smallball6"></div>
+          <div class="small ball smallball7"></div>
+          <div class="small ball smallball8"></div>
+        </div>
+        <div class="bigcon">
+          <div class="big ball"></div>
+        </div>
+      </div>
+    </div>
+    <video
+      id="ssaiPlayer"
+      data-account="1924997959001"
+      data-player="c800c858-444c-45d7-af6c-4ce98cd42a67"
+      data-embed="default"
+      width=100%
+      height=100%
+      class="video-js" controls></video>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//players.brightcove.net/1924997959001/c800c858-444c-45d7-af6c-4ce98cd42a67_default/index.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/ssai.js"></script>
+  </body>
+</html>

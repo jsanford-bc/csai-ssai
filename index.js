@@ -20,12 +20,13 @@ app.use(methodOverride());
 
 var routes = {};
 
-// handles the creation of a new asset
+// creation of a new asset
 routes.createAsset = function(req, res) {
   // console.log(req.body);
 
   Asset.createAsync(req.body.asset).bind({}).then(function(asset) {
     this.asset = asset;
+    io.emit('asset_created', asset);
     return OnceIngest.createJobAsync(asset);
   }).then(function(response) {
     return Asset.updateAsync(this.asset._id, { state: 'transcoding', once_response: response.body });
@@ -37,8 +38,15 @@ routes.createAsset = function(req, res) {
   });
 };
 
-// handles notifications of ingests
-routes.notification = function(req, res) {
+// return the asset
+routes.getAsset = function(req, res) {
+  Asset.findByIdAsync(req.params.id).then(function(asset) {
+    return res.status(200).send(asset);
+  });
+}
+
+// receive notifications of ingests from Once
+routes.handleNotification = function(req, res) {
   console.log(req.body.notification + " notification received!");
 
   // only really care about publish notifications
@@ -55,7 +63,7 @@ routes.notification = function(req, res) {
                         metadataUri: uri 
                       }).then(function(asset) {
       // tell the clients
-      alertClients(asset);
+      io.emit('video_published', asset);
       res.status(200).send('Thanks guys!');
     }).catch(function(e) {
       console.error(e, e.stack);
@@ -69,26 +77,14 @@ routes.notification = function(req, res) {
 };
 
 // set up the rest of the routes
-app.post('/asset', routes.createAsset);
-app.post('/notifications', routes.notification);
+app.post('/assets', routes.createAsset);
+app.get('/assets/:id', routes.getAsset);
+app.post('/notifications', routes.handleNotification);
 
+// set up our connection handlers
 io.on('connection', function (socket) {
   socket.emit('connections', { msg: 'Connected' });
 });
-
-// notify all of the clients that we got a video done
-function alertClients(asset) {
-  // var options = {
-  //   foreignKey: asset._id,
-  //   name: asset.name,
-  //   description: asset.description,
-  //   hlsUrl: asset.hlsUrl,
-  //   poster: asset.poster,
-  //   metadataUri: uri
-  // };
-
-  io.emit('video_published', asset);
-}
 
 // Start this party
 server.listen(4000, function() {
