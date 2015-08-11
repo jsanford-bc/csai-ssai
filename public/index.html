@@ -37,59 +37,28 @@
       </div>
       <br>
       <div class="asset-input row">
-        <div class="col-md-10">
-          <span class="pull-right small">
-            Clicking this button will ingest the mezzanine file into Once, and make the video playable in the CSAI player, 
-            using the HLS manifest provided.
-          </span>
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-md-offset-10">
           <span class="pull-right">
-            <button class="btn btn-success" id="create_asset_btn" type="button">Create Asset</button>
-          </span>
-        </div>
-      </div>
-      <br>
-      <div class="asset-input row">
-        <div class="col-md-10">
-          <span class="pull-right small">
-            Once the video has been created, this button will become active. Clicking this button will load the Brightcove
-            Player using the IMA plugin to provide a client-side preroll ad.
-          </span>
-        </div>
-        <div class="col-md-2">
-          <span class="pull-right">
-            <button class="btn btn-success" id="load_csai_btn" type="button">Load CSAI Player</button>
-          </span>
-        </div>
-      </div>
-      <br>
-      <div class="asset-input row">
-        <div class="col-md-10">
-          <span class="pull-right small">
-            As soon as the asset has been transcoded and published through Once, this button will become available. Clicking
-            this button will replace the existing player in page, with a version of the Brightcove Player with server-side
-            ad insertion for prerolls through Once.
-          </span>
-        </div>
-        <div class="col-md-2">
-          <span class="pull-right">
-            <button class="btn btn-success" id="load_ssai_btn" type="button">Load SSAI Player</button>
+            <button class="btn btn-success" id="start_btn" type="button">Start!</button>
           </span>
         </div>
       </div>
       <br>
       <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-          <div id="player_holder">
-          </div>
+        <div class="col-md-6" id="csai_holder">
+          <h3>Client-side ad insertion<h3>
+          <iframe src="csai.html" seamless id="csai_frame" width="100%"></iframe>
+        </div>
+        <div class="col-md-6" id="ssai_holder">
+          <h3>Server-side ad insertion<h3>
+          <iframe src="ssai.html" seamless id="ssai_frame" width="100%"></iframe>
         </div>
       </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//players.brightcove.net/1924997959001/c800c858-444c-45d7-af6c-4ce98cd42a67_default/index.min.js"></script>
+    <!--<script src="//players.brightcove.net/1924997959001/c800c858-444c-45d7-af6c-4ce98cd42a67_default/index.min.js"></script>-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/app.js"></script>
   </body>

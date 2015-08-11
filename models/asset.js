@@ -7,6 +7,7 @@ var Asset = {};
 Asset.create = function(asset, cb) {
   var createTimestamp = Date.now();
   var newAsset = {
+    //_id: asset.foreignKey,
     mezzanine: asset.mezzanine,
     hlsUrl: asset.hlsUrl,
     name: asset.name,
