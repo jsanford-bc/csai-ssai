@@ -19,7 +19,7 @@ $(function() {
     player = videojs('csaiPlayer');
     player.ima3({
       prerollTimeout: 5000,
-      serverUrl: 'http://solutions.brightcove.com/croberts/tools/tags/vast.php'
+      serverUrl: 'http://solutions.brightcove.com/jsanford/tools/vast.php'
     });
     player.one('loadedmetadata', function(evt) {
       player.play();
